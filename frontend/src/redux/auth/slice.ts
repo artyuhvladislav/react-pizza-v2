@@ -21,9 +21,12 @@ const cartSlice = createSlice({
         login(state: AuthState, action: PayloadAction<string>) {
             state.user.logged = true
             state.user.email = action.payload
+        },
+        logout(state: AuthState) {
+            state.user.logged = false
         }
     },
 });
 
-export const { register, login } = cartSlice.actions;
+export const { register, login, logout } = cartSlice.actions;
 export default cartSlice.reducer;

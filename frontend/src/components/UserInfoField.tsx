@@ -13,22 +13,10 @@ export const UserInfoField = ({ value, fieldName, setUserData }: UserInfoFiledPr
   const userInfo = useSelector(userInfoSelector);
 
   const handleInput = (e: any) => {
-    const name = e.target.value;
-    setInputValue(name);
-    setUserData({ ...userInfo, name });
+    const value = e.target.value;
+    setInputValue(value);
+    setUserData((prevState: any) => ({ ...prevState, [fieldName]: value }));
   };
-
-  // React.useEffect(() => {
-  //   const handleClickOutside = (e: any) => {
-  //     if (inputRef.current && !inputRef.current.contains(e.target)) {
-  //       console.log('click outside');
-  //     }
-  //   };
-  //   document.addEventListener('click', handleClickOutside, true);
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside, true);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -36,9 +24,10 @@ export const UserInfoField = ({ value, fieldName, setUserData }: UserInfoFiledPr
 
       <input
         className="cabinet__info_input"
-        type="text"
+        type={fieldName === 'number' ? 'number' : 'text'}
         value={inputValue}
         onChange={(e) => handleInput(e)}
+        onBlur={(e) => handleInput(e)}
       />
     </>
   );

@@ -6,6 +6,7 @@ import { cartSelector } from '../redux/cart/selectors';
 import { setCurrentPage, setSearchValue } from '../redux/filter/slice';
 import { Search, Auth } from './index';
 import { authSelector } from '../redux/auth/selectors';
+import LogOut from './Logout';
 
 type CartItem = {
   count: number;
@@ -61,17 +62,6 @@ export const Header = () => {
         {!pathname.includes('cart') && !pathname.includes('items') && (
           <>
             <Search />
-            {logged ? (
-              <div className="header__row">
-                <Link to="/user">
-                  <button className="button button--auth">{email}</button>
-                </Link>
-                <button className="button button--auth">log out</button>
-              </div>
-            ) : (
-              <Auth />
-            )}
-
             <div className="header__cart">
               <Link to="/cart" className="button button--cart">
                 <span>{totalPrice} $</span>
@@ -107,6 +97,16 @@ export const Header = () => {
                 <span>{totalCount}</span>
               </Link>
             </div>
+            {logged ? (
+              <div className="header__row">
+                <Link to="/user">
+                  <button className="button button--auth">{email}</button>
+                </Link>
+                <LogOut />
+              </div>
+            ) : (
+              <Auth />
+            )}
           </>
         )}
       </div>

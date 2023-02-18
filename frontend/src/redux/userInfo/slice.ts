@@ -6,7 +6,7 @@ const initialState: UserInfoState = {
     name: '',
     surname: '',
     address: '',
-    avatar: ''
+    number: ''
 }
 
 
@@ -15,8 +15,10 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         saveUserInfo(state, action: PayloadAction<UserInfoState>) {
-            // state.name = action.payload.name
-            state = { name: 'ewfwef' }
+            state.name = action.payload.name
+            state.surname = action.payload.surname
+            state.address = action.payload.address
+            state.number = action.payload.number
         }
     },
 });

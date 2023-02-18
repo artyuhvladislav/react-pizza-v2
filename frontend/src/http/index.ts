@@ -13,15 +13,15 @@ export interface AuthResponse {
 }
 
 export const API_URL = `https://react-pizza-v2-p7a2.onrender.com/api`
-
 const $api = axios.create({
   withCredentials: true,
   baseURL: API_URL
 })
 
 $api.interceptors.request.use((config: AxiosRequestConfig) => {
-  // @ts-ignore
-  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+  if (config.headers) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+  }
   return config;
 })
 

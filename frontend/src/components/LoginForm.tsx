@@ -7,48 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/auth/slice';
 import { useNavigate } from 'react-router-dom';
 import { authSelector } from '../redux/auth/selectors';
-// const LoginForm = () => {
-//   const EMAIL_TYPE = 'email';
-//   const PASSWORD_TYPE = 'password';
-
-//   const [email, setEmail] = React.useState('');
-//   const [password, setPassword] = React.useState('');
-
-//   const handleInput = (inputType: string, value: string) => {
-//     if (EMAIL_TYPE === inputType) {
-//       setEmail(value);
-//     } else if (PASSWORD_TYPE === inputType) {
-//       setPassword(value);
-//     }
-//   };
-
-//   return (
-//     <form className="form-wrapper">
-//       <label className="form-wrapper__label" htmlFor={EMAIL_TYPE}>
-//         email
-//       </label>
-//       <input
-//         onChange={({ target }) => handleInput(target.type, target.value)}
-//         className="form-wrapper__input"
-//         type={EMAIL_TYPE}
-//         id={EMAIL_TYPE}
-//         value={email}
-//         placeholder="enter your email"
-//       />
-//       <label className="form-wrapper__label" htmlFor={PASSWORD_TYPE}>
-//         password
-//       </label>
-//       <input
-//         onChange={({ target }) => handleInput(target.type, target.value)}
-//         className="form-wrapper__input"
-//         type={PASSWORD_TYPE}
-//         id={PASSWORD_TYPE}
-//         value={password}
-//         placeholder="enter your password"
-//       />
-//     </form>
-//   );
-// };
 interface FormikValues {
   email: string;
   password: string;
@@ -86,7 +44,7 @@ const LoginForm = () => {
 
   const onSubmit = async (values: FormikValues, formikHelpers: FormikHelpers<FormikValues>) => {
     const { email, password } = values;
-    const response = await loginHandler(email, password);
+    await loginHandler(email, password);
     formikHelpers.resetForm();
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { UserFileImg, UserInfoField } from '../components';
+import { UserInfoField } from '../components';
 import { authSelector } from '../redux/auth/selectors';
 import { saveUserInfo } from '../redux/userInfo/slice';
 import { userInfoSelector } from './../redux/userInfo/selectors';
@@ -11,16 +11,11 @@ const User = () => {
   const userInfo = useSelector(userInfoSelector);
   const [userData, setUserData] = React.useState(userInfo);
   const dispatch = useDispatch();
-  console.log(userData);
+
   const handleSaveUserInfo = () => {
+    console.log({ userData });
     dispatch(saveUserInfo(userData));
   };
-
-  const handleInput = (e: any) => {
-    const name = e.target.value;
-    setUserData({ ...userData, name });
-  };
-
   return (
     <>
       {logged ? (
@@ -31,34 +26,15 @@ const User = () => {
           <div className="cabinet__info">
             <h3 className="cabinet__info_title">user info</h3>
             <UserInfoField fieldName="name" value={userInfo.name} setUserData={setUserData} />
-            {/* <p className="cabinet__info_text">name</p>
-            <input
-              className="cabinet__info_input"
-              type="text"
-              value={userData.name}
-              onChange={(e) => handleInput(e)}
-            /> */}
-
-            {/* <p className="cabinet__info_text">surname: </p>
-            <input
-              className="cabinet__info_input"
-              type="text"
-              name="surname"
-              placeholder="enter surname"
-              // onChange={handleInputs}
-              value={userInfo.surname}
-            /> */}
-            <p className="cabinet__info_text">address: </p>
-            <input
-              className="cabinet__info_input"
-              type="text"
-              name="address"
-              placeholder="enter address"
-            />
-            <p className="cabinet__info_text">avatar: </p>
-            <UserFileImg />
-            <button onClick={handleSaveUserInfo}>save data</button>
+            <UserInfoField fieldName="surname" value={userInfo.surname} setUserData={setUserData} />
+            <UserInfoField fieldName="address" value={userInfo.address} setUserData={setUserData} />
+            <UserInfoField fieldName="number" value={userInfo.number} setUserData={setUserData} />
+            <br />
+            <button className="button button--outline" onClick={handleSaveUserInfo}>
+              save data
+            </button>
           </div>
+          <br />
           <Link to="/" className="button button--outline go-back-btn">
             <span>go back</span>
           </Link>

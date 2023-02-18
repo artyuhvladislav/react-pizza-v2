@@ -26,8 +26,8 @@ export const SortPopup = React.memo(({ value }: SortProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = (e: any) => {
-      if (open && ref.current && !ref.current.contains(e.target)) {
+    const checkIfClickedOutside = (e: MouseEvent) => {
+      if (open && ref.current && !ref.current.contains(e.target as Element)) {
         setOpen(false);
       }
     };
