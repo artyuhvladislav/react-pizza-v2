@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.USER_URL,
+    origin: process.env.API_URL,
   }),
 );
 app.use(cookieParser());
@@ -26,11 +26,6 @@ const myApp = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    // app.use(express.static(path.join(__dirname, '/frontend')));
-
-    // app.get('*', (req, res) => {
-    //   res.sendFile(path.join(__dirname, '/frontend/build', 'index.html'));
-    // });
     app.listen(PORT, () => {
       console.log(`server is running on port ${PORT}`);
     });
