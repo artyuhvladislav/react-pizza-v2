@@ -12,7 +12,7 @@ export interface AuthResponse {
   user: IUser;
 }
 
-export const API_URL = `http://localhost:5000/api`
+export const API_URL = `https://react-pizza-v2-p7a2.onrender.com/api`
 
 const $api = axios.create({
   withCredentials: true,
