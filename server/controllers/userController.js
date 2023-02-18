@@ -6,13 +6,15 @@ class UserController {
   async registration(req, res, next) {
     try {
       const { email, password } = req.body;
+      console.log('UserController', email, password);
+
+      const userData = await userService.registration(email, password);
+      const maxAge = 30 * 24 * 60 * 60 * 1000;
+      res.cookie('refreshToken', userData.refreshToken, { httpOnly: true, maxAge });
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest('Validation error', errors.array()));
       }
-      const userData = await userService.registration(email, password);
-      const maxAge = 30 * 24 * 60 * 60 * 1000;
-      res.cookie('refreshToken', userData.refreshToken, { httpOnly: true, maxAge });
       return res.json(userData);
     } catch (e) {
       next(e);

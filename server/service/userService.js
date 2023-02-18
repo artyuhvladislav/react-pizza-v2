@@ -10,11 +10,11 @@ class UserService {
   async registration(email, password) {
     const candidate = await userModel.findOne({ email });
     if (candidate) {
-      throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`);
+      throw ApiError.BadRequest(`User with this ${email} already registered`);
     }
     const activationLink = uuid.v4();
-    const hashPassword = await bcrypt.hash(password, 3);
 
+    const hashPassword = await bcrypt.hash(password, 3);
     const newUser = await userModel.create({ email, password: hashPassword, activationLink });
     await mailService.sendActivationLink(
       email,

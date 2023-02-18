@@ -20,9 +20,7 @@ const $api = axios.create({
 })
 
 $api.interceptors.request.use((config: AxiosRequestConfig) => {
-  if (config.headers === undefined) {
-    config.headers = {};
-  }
+  // @ts-ignore
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
   return config;
 })

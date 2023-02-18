@@ -1,0 +1,48 @@
+.cabinet {
+    padding: 20px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    max-width: 70%;
+    margin: 0 auto;
+
+    &__title {
+        font-size: 20px;
+        margin-bottom: 20px;
+
+        span {
+            color: #fe5f1e;
+        }
+    }
+
+    &__info {
+
+        &_title {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        &_text {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+
+            strong {
+                padding-left: 15px;
+            }
+        }
+
+        &_input {
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 12px 20px;
+            max-width: 400px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        &_icon {
+            max-width: 20px;
+            margin-left: 10px;
+        }
+    }
+}

@@ -83,9 +83,38 @@
             color: #7b7b7b;
         }
     }
+
+    &__error {
+        color: #fe401e;
+        margin: 10px 0;
+    }
 }
 
 .input-text-error {
     color: #fe401e;
     margin-bottom: 10px;
+}
+
+.form-wrapper-ok {
+    color: lightgreen;
+    text-align: center;
+
+
+    &__icon {
+        max-width: 100px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    h3,
+    p {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    p {
+        color: #26ab5e;
+        font-size: 20px;
+    }
+
 }

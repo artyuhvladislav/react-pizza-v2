@@ -1,9 +1,10 @@
 import { clsx } from 'clsx';
 import { FormikHelpers, FormikProps, useFormik } from 'formik';
 import React from 'react';
-import $api from '../http';
 import AuthService from '../services';
 import { signUpSchema } from './../schemas/index';
+import { useDispatch } from 'react-redux';
+import { register } from '../redux/auth/slice';
 
 interface FormikValues {
   email: string;
@@ -14,22 +15,29 @@ const SignUpForm = () => {
   const EMAIL_TYPE = 'email';
   const PASSWORD_TYPE = 'password';
   const CONFIRM_PASSWORD_TYPE = 'confirmPassword';
+  const dispatch = useDispatch();
+
+  const [registered, setRegistered] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const registration = async (email: string, password: string) => {
     try {
       const response = await AuthService.registration(email, password);
-      console.log(response);
+      if (response.status === 200) {
+        dispatch(register());
+        setRegistered(true);
+        setErrorMessage('');
+      }
       localStorage.setItem('token', response.data.accessToken);
-      // this.setAuth(true);
-      // this.setUser(response.data.user);
     } catch (e: any) {
+      setErrorMessage(e.response?.data?.message);
       console.log(e.response?.data?.message);
     }
   };
 
   const onSubmit = async (values: FormikValues, formikHelpers: FormikHelpers<FormikValues>) => {
     const { email, password } = values;
-    $api.post('/registration', registration(email, password));
+    const response = await registration(email, password);
     formikHelpers.resetForm();
   };
   const {
@@ -50,7 +58,17 @@ const SignUpForm = () => {
     onSubmit,
   });
 
-  return (
+  return registered ? (
+    <div className="form-wrapper form-wrapper-ok">
+      <img
+        className="form-wrapper-ok__icon"
+        src="https://i.pinimg.com/736x/13/f6/bc/13f6bc8a60da4da9513e7a1f5fc57955.jpg"
+        alt="ok"
+      />
+      <h2>Thank you for registration</h2>
+      <p>Please confirm your registration, check your post</p>
+    </div>
+  ) : (
     <form onSubmit={handleSubmit} className="form-wrapper">
       <label
         className={clsx(
@@ -117,6 +135,7 @@ const SignUpForm = () => {
       {errors.confirmPassword && touched.confirmPassword && (
         <p className="input-text-error">{errors.confirmPassword}</p>
       )}
+      {errorMessage && <p className="form-wrapper__error">{errorMessage}</p>}
       <button
         disabled={isSubmitting}
         className={clsx(

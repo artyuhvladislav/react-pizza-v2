@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import './scss/app.scss';
 import Auth from './pages/Auth';
+import User from './pages/User';
 
 const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
 const FullPizza = React.lazy(() => import(/* webpackChunkName: "FullPizza" */ './pages/FullPizza'));
@@ -20,6 +21,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/items/:id" element={<FullPizza />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/user" element={<User />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

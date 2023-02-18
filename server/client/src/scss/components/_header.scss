@@ -10,6 +10,14 @@
     align-items: center;
     justify-content: space-between;
 
+    @media (max-width: 1024px) {
+      flex-wrap: wrap;
+
+      .button--cart {
+        margin-top: 20px;
+      }
+    }
+
     @media (max-width: 645px) {
       flex-direction: column;
 
@@ -46,4 +54,9 @@
       color: #7b7b7b;
     }
   }
+
+  &__row {
+    display: flex;
+  }
+
 }

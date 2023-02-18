@@ -10,6 +10,14 @@ export const getCartItemsFromLS = () => {
   };
 };
 
+export const getUserAuthEmailFromLS = () => {
+  const data = localStorage.getItem('user-auth-email');
+  const email = data ? JSON.parse(data) : [];
+  return {
+    email,
+  };
+};
+
 export const calcTotalPrice = (items: TCartItem[]) => {
   return items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
 };

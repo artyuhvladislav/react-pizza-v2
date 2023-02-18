@@ -22,7 +22,10 @@ app.use(errorMiddleWare);
 
 const myApp = async () => {
   try {
-    await mongoose.connect(process.env.DB_URL);
+    await mongoose.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     app.use(express.static(path.join(__dirname, '/client')));
 
     app.get('*', (req, res) => {

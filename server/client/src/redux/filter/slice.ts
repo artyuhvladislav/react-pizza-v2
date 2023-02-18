@@ -36,9 +36,6 @@ const filterSlice = createSlice({
                     name: 'rating',
                     sortProperty: SortPropertyEnum.RATING_DESC,
                 };
-                // state.currentPage = Number(action.payload.currentPage);
-                // state.sort = action.payload.sort;
-                // state.categoryId = Number(action.payload.categoryId);
             }
         },
         setSearchValue(state: FilterState, action: PayloadAction<string>) {

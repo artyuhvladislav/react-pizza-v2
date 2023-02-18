@@ -4,7 +4,8 @@ import logo from '../assets/img/pizza-logo.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { cartSelector } from '../redux/cart/selectors';
 import { setCurrentPage, setSearchValue } from '../redux/filter/slice';
-import { Search } from './index';
+import { Search, Auth } from './index';
+import { authSelector } from '../redux/auth/selectors';
 
 type CartItem = {
   count: number;
@@ -20,6 +21,7 @@ type CartItem = {
 export const Header = () => {
   const isMounted = React.useRef(false);
   const { totalPrice, items } = useSelector(cartSelector);
+  const { logged, email } = useSelector(authSelector);
   const totalCount = items.reduce((sum: number, item: CartItem) => sum + item.count, 0);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -59,6 +61,17 @@ export const Header = () => {
         {!pathname.includes('cart') && !pathname.includes('items') && (
           <>
             <Search />
+            {logged ? (
+              <div className="header__row">
+                <Link to="/user">
+                  <button className="button button--auth">{email}</button>
+                </Link>
+                <button className="button button--auth">log out</button>
+              </div>
+            ) : (
+              <Auth />
+            )}
+
             <div className="header__cart">
               <Link to="/cart" className="button button--cart">
                 <span>{totalPrice} $</span>
