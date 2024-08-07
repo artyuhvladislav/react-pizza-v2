@@ -38,14 +38,6 @@ export const Header = () => {
 
   return (
     <div className="header">
-      <div className="banner">
-        <div className="banner__top">
-          <span>SUPPORT</span>
-        </div>
-        <div className="banner__bottom">
-          <span>UKRAINE</span>
-        </div>
-      </div>
       <div className="container">
         <Link to="/" onClick={setDefaultState}>
           <div className="header__logo">
